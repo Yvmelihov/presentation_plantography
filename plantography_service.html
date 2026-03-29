@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Компьютерная плантография | ОРТЕКА — Экспертная ортопедия</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+        :root {
+            --primary: #0055a5;
+            --cta: #39ff14;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --text-dark: #0f172a;
+            --text-light: #475569;
+            --bg-light: #f0f4f8;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--bg-light);
+            min-height: 100vh;
+            padding-top: 80px; 
+            line-height: 1.6;
+        }
+
+        /* ШАПКА */
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 80px;
+            background: var(--header-bg);
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 85, 165, 0.1);
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1400px;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .logo span { color: var(--text-dark); font-weight: 400; margin-left: 5px; }
+        .nav-menu { display: flex; gap: 25px; }
+        .nav-link { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: color 0.2s; }
+        .nav-link:hover { color: var(--primary); }
+        .phone { font-size: 1.1rem; font-weight: 700; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+
+        /* ГЛАВНЫЙ БЛОК */
+        .hero-wrapper { display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+        
+        .main-hero-unit {
+            display: flex;
+            max-width: 1400px;
+            width: 100%;
+            background: white;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 71, 147, 0.1);
+            position: relative;
+        }
+
+        .text-section { flex: 1; padding: 60px; z-index: 5; background: white; }
+
+        .image-section {
+            flex: 1.2;
+            position: relative;
+            background: #f8fafc;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .main-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* РЕЙТИНГ */
+        .rating-box {
+            display: inline-flex;
+            align-items: center;
+            background: #f8fafc;
+            padding: 10px 18px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+        }
+        .stars {
+            color: #f59e0b;
+            font-weight: 700;
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+        .rating-text {
+            color: #64748b;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* ТОЧКА БОЛИ */
+        .pain-point {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            z-index: 3;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            display: none; 
+        }
+
+        .pulse {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.8) 0%, rgba(255, 0, 0, 0) 70%);
+            border-radius: 50%;
+            animation: pain-anim 2s infinite ease-in-out;
+        }
+
+        @keyframes pain-anim {
+            0% { transform: scale(0.7); opacity: 0.4; }
+            50% { transform: scale(1.3); opacity: 0.9; }
+            100% { transform: scale(0.7); opacity: 0.4; }
+        }
+
+        /* ПЛАВАЮЩАЯ ПЛАШКА */
+        .time-badge {
+            position: absolute;
+            bottom: 35px;
+            right: 35px;
+            background: white;
+            padding: 22px 32px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+            z-index: 10;
+            text-align: center;
+            animation: float-anim 3.5s infinite ease-in-out;
+            will-change: transform;
+        }
+
+        .time-badge b { font-size: 2.2rem; display: block; color: var(--primary); line-height: 1; margin-bottom: 4px; }
+        .time-badge span { font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        @keyframes float-anim {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-18px); }
+        }
+
+        /* КНОПКА С ЭФФЕКТОМ БЛИКА */
+        .cta-button {
+            background: var(--cta);
+            color: #064e3b;
+            padding: 20px 40px;
+            border-radius: 18px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden; /* Важно для блика */
+            box-shadow: 0 4px 0 #2ecc11; /* Эффект объемной кнопки */
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(57, 255, 20, 0.4);
+        }
+
+        .cta-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #2ecc11;
+        }
+
+        /* Сам блик */
+        .cta-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.6) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg);
+            animation: shine 4s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -150%; }
+            20% { left: 150%; }
+            100% { left: 150%; } /* Пауза между бликами */
+        }
+
+        .image-section::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; bottom: 0;
+            width: 100px;
+            background: linear-gradient(to right, white 0%, transparent 100%);
+            z-index: 2;
+        }
+
+        /* ТЕКСТ */
+        .service-tag { display: inline-block; background: rgba(0, 85, 165, 0.1); color: var(--primary); padding: 6px 15px; border-radius: 30px; font-size: 0.8rem; font-weight: 700; margin-bottom: 20px; }
+        h1 { font-size: 3rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; color: var(--text-dark); }
+        h1 span { color: var(--primary); }
+        .lead { font-size: 1.1rem; color: var(--text-light); margin-bottom: 20px; }
+
+        .benefit-list { display: grid; gap: 12px; margin-bottom: 35px; }
+        .b-item { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.95rem; }
+        .b-icon {
+            width: 16px;
+            height: 16px;
+            background: #00d2ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .b-icon::after {
+            content: "✓";
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* КАРТОЧКИ */
+        .service-info { max-width: 1400px; margin: 0 auto 60px; padding: 0 20px; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .info-card { background: white; padding: 25px; border-radius: 20px; border: 1px solid var(--border-color); }
+        .info-card h3 { color: var(--primary); margin-bottom: 12px; }
+        .info-card ul { list-style: none; color: var(--text-light); font-size: 0.95rem; }
+        .info-card li { margin-bottom: 6px; padding-left: 15px; position: relative; }
+        .info-card li::before { content: "•"; position: absolute; left: 0; color: var(--primary); }
+
+        @media (max-width: 1024px) {
+            .main-hero-unit { flex-direction: column; }
+            .text-section { padding: 40px 25px; text-align: center; }
+            .image-section { min-height: 450px; }
+            .image-section::before { width: 100%; height: 80px; background: linear-gradient(to bottom, white 0%, transparent 100%); }
+            h1 { font-size: 2.2rem; }
+            .nav-menu { display: none; }
+            .rating-box { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-container">
+        <a href="#" class="logo">ORT<span>ОРТЕКА</span></a>
+        <nav class="nav-menu">
+            <a href="#" class="nav-link">Услуги</a>
+            <a href="#" class="nav-link">Врачи</a>
+            <a href="#" class="nav-link">Цены</a>
+            <a href="#" class="nav-link">Контакты</a>
+        </nav>
+        <a href="tel:88003334455" class="phone">📞 8 (800) 333-44-55</a>
+    </div>
+</header>
+
+<div class="hero-wrapper">
+    <div class="main-hero-unit">
+        <div class="text-section">
+            <div class="service-tag">Ортопедическая диагностика</div>
+            <h1>Болит спина или <span>быстро устают ноги?</span></h1>
+            <p class="lead">Узнайте причину за 5 минут на компьютерной плантографии. Точная цифровая диагностика стоп без очередей.</p>
+            
+            <div class="rating-box">
+                <span class="stars">★★★★★ 4.9</span>
+                <span class="rating-text">по результатам 1 200+ пациентов</span>
+            </div>
+
+            <div class="benefit-list">
+                <div class="b-item"><div class="b-icon"></div> Врачи со стажем более 12 лет</div>
+                <div class="b-item"><div class="b-icon"></div> Мгновенный результат на руки</div>
+                <div class="b-item"><div class="b-icon"></div> Безболезненно и безопасно</div>
+            </div>
+
+            <a href="#" class="cta-button">Записаться на диагностику</a>
+        </div>
+
+        <div class="image-section" id="img-box">
+            <img src="П.png" class="main-photo" id="target-img" alt="Компьютерная плантография">
+            
+            <div class="pain-point" id="dot">
+                <div class="pulse"></div>
+            </div>
+
+            <div class="time-badge">
+                <b>5 мин</b>
+                <span>на диагностику</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="service-info">
+    <div class="info-grid">
+        <div class="info-card">
+            <h3>Что такое плантография</h3>
+            <ul>
+                <li>Цифровой анализ состояния стоп</li>
+                <li>Оценка распределения нагрузки</li>
+                <li>Выявление скрытых патологий</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <h3>Подходит при</h3>
+            <ul>
+                <li>Болях в ногах и пояснице</li>
+                <li>Плоскостопии и "косточках"</li>
+                <li>Нарушениях осанки</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <h3>Преимущества</h3>
+            <ul>
+                <li>Быстро: результат за 5 минут</li>
+                <li>Точно: цифровые показатели</li>
+                <li>Безопасно: никакой радиации</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updatePainPoint() {
+        const img = document.getElementById('target-img');
+        const box = document.getElementById('img-box');
+        const dot = document.getElementById('dot');
+
+        if (!img.naturalWidth) return;
+
+        const boxRect = box.getBoundingClientRect();
+        const imgRatio = img.naturalWidth / img.naturalHeight;
+        const boxRatio = boxRect.width / boxRect.height;
+
+        let renderW, renderH, offsetX, offsetY;
+
+        if (boxRatio > imgRatio) {
+            renderW = boxRect.width;
+            renderH = boxRect.width / imgRatio;
+            offsetX = 0;
+            offsetY = (boxRect.height - renderH) / 2;
+        } else {
+            renderH = boxRect.height;
+            renderW = boxRect.height * imgRatio;
+            offsetX = (boxRect.width - renderW) / 2;
+            offsetY = 0;
+        }
+
+        const targetX = 24.5; 
+        const targetY = 36.0;
+
+        const finalX = offsetX + (renderW * (targetX / 100));
+        const finalY = offsetY + (renderH * (targetY / 100));
+
+        dot.style.left = finalX + 'px';
+        dot.style.top = finalY + 'px';
+        dot.style.display = 'block';
+    }
+
+    window.addEventListener('load', updatePainPoint);
+    window.addEventListener('resize', updatePainPoint);
+    if (document.getElementById('target-img').complete) updatePainPoint();
+</script>
+
+</body>
+</html>
